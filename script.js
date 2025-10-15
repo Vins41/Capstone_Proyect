@@ -1,15 +1,16 @@
 const preguntas = [
-    { texto: "P1: ¿Con qué frecuencia se ha sentido estresado la última semana?", invertida: false },
-    { texto: "P2: ¿Con qué frecuencia ha sentido que no puede controlar lo importante en su vida?", invertida: false },
-    { texto: "P3: ¿Con qué frecuencia se ha sentido nervioso o estresado?", invertida: false },
-    { texto: "P4: ¿Con qué frecuencia ha sentido que no puede afrontar todas las cosas que debe hacer?", invertida: true },
-    { texto: "P5: ¿Con qué frecuencia se ha sentido que las cosas le superan?", invertida: true },
-    { texto: "P6: ¿Con qué frecuencia ha sentido que no puede controlar lo que le pasa?", invertida: false },
-    { texto: "P7: ¿Con qué frecuencia ha sentido que todo le sale mal?", invertida: true },
-    { texto: "P8: ¿Con qué frecuencia se ha sentido agobiado?", invertida: true },
-    { texto: "P9: ¿Con qué frecuencia se ha sentido incapaz de hacer frente a las dificultades?", invertida: false },
-    { texto: "P10: ¿Con qué frecuencia se ha sentido bajo presión?", invertida: false }
+  { texto: "<strong>P1:</strong> En el último mes, ¿con qué frecuencia te has sentido molesto por algo que pasó sin esperarlo?", invertida: false },
+  { texto: "<strong>P2:</strong> En el último mes, ¿con qué frecuencia sentiste que no podías controlar las cosas importantes de tu vida?", invertida: false },
+  { texto: "<strong>P3:</strong> En el último mes, ¿con qué frecuencia te has sentido nervioso o estresado?", invertida: false },
+  { texto: "<strong>P4:</strong> En el último mes, ¿con qué frecuencia te has sentido seguro de poder manejar tus problemas personales?", invertida: true },
+  { texto: "<strong>P5:</strong> En el último mes, ¿con qué frecuencia has sentido que las cosas te salían bien?", invertida: true },
+  { texto: "<strong>P6:</strong> En el último mes, ¿con qué frecuencia sentiste que no podías con todas tus tareas o responsabilidades?", invertida: false },
+  { texto: "<strong>P7:</strong> En el último mes, ¿con qué frecuencia has podido mantener la calma cuando algo te molestaba?", invertida: true },
+  { texto: "<strong>P8:</strong> En el último mes, ¿con qué frecuencia sentiste que tenías el control de las cosas en tu vida?", invertida: true },
+  { texto: "<strong>P9:</strong> En el último mes, ¿con qué frecuencia te sentiste frustrado porque las cosas se salían de tu control?", invertida: false },
+  { texto: "<strong>P10:</strong> En el último mes, ¿con qué frecuencia sentiste que los problemas se acumulaban tanto que no podías con ellos?", invertida: false }
 ];
+
 
 const respuestasTexto = ["Nunca", "Casi nunca", "Algunas veces", "Casi siempre", "Siempre"];
 const preguntasDiv = document.getElementById('preguntas');
