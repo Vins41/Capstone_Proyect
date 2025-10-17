@@ -1,14 +1,14 @@
 const preguntas = [
-  { texto: "P1: En el último mes, ¿con qué frecuencia te has sentido molesto por algo que pasó sin esperarlo?", invertida: false },
-  { texto: "P2: En el último mes, ¿con qué frecuencia sentiste que no podías controlar las cosas importantes de tu vida?", invertida: false },
-  { texto: "P3: En el último mes, ¿con qué frecuencia te has sentido nervioso o estresado?", invertida: false },
-  { texto: "P4: En el último mes, ¿con qué frecuencia te has sentido seguro de poder manejar tus problemas personales?", invertida: true },
-  { texto: "P5: En el último mes, ¿con qué frecuencia has sentido que las cosas te salían bien?", invertida: true },
-  { texto: "P6: En el último mes, ¿con qué frecuencia sentiste que no podías con todas tus tareas o responsabilidades?", invertida: false },
-  { texto: "P7: En el último mes, ¿con qué frecuencia has podido mantener la calma cuando algo te molestaba?", invertida: true },
-  { texto: "P8: En el último mes, ¿con qué frecuencia sentiste que tenías el control de las cosas en tu vida?", invertida: true },
-  { texto: "P9: En el último mes, ¿con qué frecuencia te sentiste frustrado porque las cosas se salían de tu control?", invertida: false },
-  { texto: "P10: En el último mes, ¿con qué frecuencia sentiste que los problemas se acumulaban tanto que no podías con ellos?", invertida: false }
+  { texto: "P1: En el último mes, ¿con qué frecuencia te has sentido molesto por algo que pasó sin esperarlo?" },
+  { texto: "P2: En el último mes, ¿con qué frecuencia sentiste que no podías controlar las cosas importantes de tu vida?" },
+  { texto: "P3: En el último mes, ¿con qué frecuencia te has sentido nervioso o estresado?" },
+  { texto: "P4: En el último mes, ¿con qué frecuencia te has sentido seguro de poder manejar tus problemas personales?" },
+  { texto: "P5: En el último mes, ¿con qué frecuencia has sentido que las cosas te salían bien?" },
+  { texto: "P6: En el último mes, ¿con qué frecuencia sentiste que no podías con todas tus tareas o responsabilidades?"},
+  { texto: "P7: En el último mes, ¿con qué frecuencia has podido mantener la calma cuando algo te molestaba?" },
+  { texto: "P8: En el último mes, ¿con qué frecuencia sentiste que tenías el control de las cosas en tu vida?" },
+  { texto: "P9: En el último mes, ¿con qué frecuencia te sentiste frustrado porque las cosas se salían de tu control?"},
+  { texto: "P10: En el último mes, ¿con qué frecuencia sentiste que los problemas se acumulaban tanto que no podías con ellos?"}
 ];
 
 
@@ -27,7 +27,8 @@ preguntas.forEach((preg, i) => {
     const radioGroup = document.createElement('div');
     radioGroup.className = 'radio-group';
 
-    const valores = preg.invertida ? [4,3,2,1,0] : [0,1,2,3,4];
+    //const valores = preg.invertida ? [4,3,2,1,0] : [0,1,2,3,4];
+    const valores = [0, 1, 2, 3, 4];
 
     respuestasTexto.forEach((text, j) => {
         const input = document.createElement('input');
