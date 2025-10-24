@@ -1,7 +1,7 @@
 const preguntas = [
   { texto: "P1: En el último mes, ¿con qué frecuencia te has sentido molesto por algo que pasó sin esperarlo?" },
-  { texto: "P2: En el último mes, ¿con qué frecuencia sentiste que no podías controlar las cosas importantes de tu vida?" },
-  { texto: "P3: En el último mes, ¿con qué frecuencia te has sentido nervioso o estresado?" },
+  { texto: "P2: En el último mes, ¿con qué frecuencia has sentido que no podías controlar las cosas importantes de tu vida?" },
+  { texto: "P3: En el último mes, ¿con qué frecuencia te has sentido ansioso o estresado?" },
   { texto: "P4: En el último mes, ¿con qué frecuencia te has sentido seguro de poder manejar tus problemas personales?" },
   { texto: "P5: En el último mes, ¿con qué frecuencia has sentido que las cosas te salían bien?" },
   { texto: "P6: En el último mes, ¿con qué frecuencia sentiste que no podías con todas tus tareas o responsabilidades?"},
