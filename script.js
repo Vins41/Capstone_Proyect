@@ -74,37 +74,47 @@ document.getElementById('formEncuesta').addEventListener('submit', async (e) => 
   });
 
   try {
-    const response = await fetch('https://capstone-backend-vins.azurewebsites.net/respuestas', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
+  const response = await fetch('https://capstone-backend-vins.azurewebsites.net/respuestas', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
 
-    if (!response.ok) {
-      throw new Error(`Error HTTP: ${response.status}`);
+  const text = await response.text();
+  console.log("🧾 Respuesta cruda del servidor:", text);
+
+  let result;
+    try {
+        result = JSON.parse(text);
+    } catch {
+        throw new Error("⚠️ La respuesta no es JSON válido");
     }
 
-    const result = await response.json();
-    console.log("✅ Resultado recibido:", result);
+    console.log("✅ Resultado parseado:", result);
+
+    if (result.prediccion === undefined || result.probabilidad === undefined) {
+        throw new Error("⚠️ Faltan datos en la respuesta del servidor");
+    }
 
     Swal.fire({
-      icon: 'success',
-      title: 'Resultado del test',
-      html: `
+        icon: 'success',
+        title: 'Resultado del test',
+        html: `
         <b>Predicción:</b> ${result.prediccion}<br>
         <b>Probabilidad:</b> ${result.probabilidad}%
-      `,
-      confirmButtonText: 'Aceptar'
+        `,
+        confirmButtonText: 'Aceptar'
     });
 
     document.getElementById('formEncuesta').reset();
 
-  } catch (err) {
+    } catch (err) {
     console.error(err);
     Swal.fire({
-      icon: 'error',
-      title: 'Error',
-      text: 'No se pudo enviar la encuesta. Inténtalo de nuevo.'
+        icon: 'error',
+        title: 'Error',
+        text: 'No se pudo enviar la encuesta. Inténtalo de nuevo.'
     });
-  }
+    }
+
 });
