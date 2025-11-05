@@ -125,7 +125,6 @@ document.getElementById('formEncuesta').addEventListener('submit', async (e) => 
       title: 'Resultado del test',
       html: `
         <b>Predicción:</b> ${result.prediccion}<br>
-        <b>Probabilidad:</b> ${result.probabilidad}%
       `,
       confirmButtonText: 'Aceptar'
     });
