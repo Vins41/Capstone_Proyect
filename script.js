@@ -52,6 +52,7 @@ document.getElementById('formEncuesta').addEventListener('submit', async (e) => 
   const data = { genero: parseInt(document.getElementById('genero').value) };
 
   // Recoger respuestas
+  const respuestasPreguntas = [];
   for (let i = 1; i <= 10; i++) {
     const selected = document.querySelector(`input[name="p${i}"]:checked`);
     if (!selected) {
@@ -62,12 +63,13 @@ document.getElementById('formEncuesta').addEventListener('submit', async (e) => 
       });
       return;
     }
-    data[`p${i}`] = parseInt(selected.value);
+    const valor = parseInt(selected.value);
+    data[`p${i}`] = valor;
+    respuestasPreguntas.push(valor);
   }
 
   // Validar que no todas las respuestas sean iguales
-  const valores = Object.values(data).filter(v => typeof v === 'number');
-  if (new Set(valores).size === 1) {
+  if (new Set(respuestasPreguntas).size === 1) {
     Swal.fire({
       icon: 'warning',
       title: 'Responde con sinceridad',
