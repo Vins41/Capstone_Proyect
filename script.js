@@ -49,10 +49,11 @@ preguntas.forEach((preg, i) => {
 // Enviar respuestas al backend
 document.getElementById('formEncuesta').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const data = { genero: parseInt(document.getElementById('genero').value) };
 
-  // Recoger respuestas
-  const respuestasPreguntas = [];
+  const data = {};
+  const respuestas = [];
+
+  // 1️⃣ Recoger respuestas y validar que todas estén contestadas
   for (let i = 1; i <= 10; i++) {
     const selected = document.querySelector(`input[name="p${i}"]:checked`);
     if (!selected) {
@@ -61,27 +62,39 @@ document.getElementById('formEncuesta').addEventListener('submit', async (e) => 
         title: 'Falta responder',
         text: `Por favor responde la pregunta ${i}`
       });
-      return;
+      return; // ❌ Si falta respuesta, salimos antes de enviar
     }
     const valor = parseInt(selected.value);
     data[`p${i}`] = valor;
-    respuestasPreguntas.push(valor);
+    respuestas.push(valor);
   }
 
-  // Validar que no todas las respuestas sean iguales
-  if (new Set(respuestasPreguntas).size === 1) {
+  // 2️⃣ Validar que no todas las respuestas sean iguales
+  if (new Set(respuestas).size === 1) {
     Swal.fire({
       icon: 'warning',
       title: 'Responde con sinceridad',
       text: 'No puedes marcar todas las respuestas iguales. Por favor responde con sinceridad.'
     });
-    return;
+    return; // ❌ Salimos antes de enviar
   }
 
+  // 3️⃣ Agregar genero
+  const generoSelect = document.getElementById('genero');
+  if (!generoSelect.value) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Falta seleccionar género',
+      text: 'Por favor selecciona tu género'
+    });
+    return;
+  }
+  data.genero = parseInt(generoSelect.value);
+
+  // 4️⃣ Si pasa todas las validaciones, enviar
   const enviarBtn = document.querySelector('#formEncuesta button[type="submit"]');
   enviarBtn.disabled = true;
 
-  // Mostrar ventana de "Enviando..."
   Swal.fire({
     title: 'Enviando respuestas...',
     text: 'Por favor espera un momento',
@@ -98,7 +111,6 @@ document.getElementById('formEncuesta').addEventListener('submit', async (e) => 
 
     const result = await response.json();
 
-    // Manejo seguro si el backend devuelve error
     if (result.error) {
       Swal.fire({
         icon: 'error',
@@ -108,7 +120,6 @@ document.getElementById('formEncuesta').addEventListener('submit', async (e) => 
       return;
     }
 
-    // Mostrar resultado
     Swal.fire({
       icon: 'success',
       title: 'Resultado del test',
