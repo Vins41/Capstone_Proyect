@@ -64,6 +64,10 @@ document.getElementById('formEncuesta').addEventListener('submit', async (e) => 
     data[`p${i}`] = parseInt(selected.value);
   }
 
+  const enviarBtn = document.querySelector('#formEncuesta button[type="submit"]');
+  enviarBtn.disabled = true;
+
+  // Mostrar ventana de "Enviando..."
   Swal.fire({
     title: 'Enviando respuestas...',
     text: 'Por favor espera un momento',
@@ -78,18 +82,19 @@ document.getElementById('formEncuesta').addEventListener('submit', async (e) => 
       body: JSON.stringify(data)
     });
 
-    const text = await response.text();
-    let result;
-    try {
-      result = JSON.parse(text);
-    } catch {
-      throw new Error("⚠️ La respuesta no es JSON válido");
+    const result = await response.json();
+
+    // Manejo seguro si el backend devuelve error
+    if (result.error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al procesar la encuesta',
+        text: result.detalle || 'Inténtalo de nuevo'
+      });
+      return;
     }
 
-    if (!result.prediccion || result.probabilidad === undefined) {
-      throw new Error("⚠️ Faltan datos en la respuesta del servidor");
-    }
-
+    // Mostrar resultado
     Swal.fire({
       icon: 'success',
       title: 'Resultado del test',
@@ -109,5 +114,7 @@ document.getElementById('formEncuesta').addEventListener('submit', async (e) => 
       title: 'Error',
       text: 'No se pudo enviar la encuesta. Inténtalo de nuevo.'
     });
+  } finally {
+    enviarBtn.disabled = false;
   }
 });
