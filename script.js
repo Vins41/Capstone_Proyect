@@ -64,10 +64,6 @@ document.getElementById('formEncuesta').addEventListener('submit', async (e) => 
     data[`p${i}`] = parseInt(selected.value);
   }
 
-  const enviarBtn = document.querySelector('#formEncuesta button[type="submit"]');
-  enviarBtn.disabled = true;
-
-  // Mostrar ventana de "enviando"
   Swal.fire({
     title: 'Enviando respuestas...',
     text: 'Por favor espera un momento',
@@ -78,13 +74,18 @@ document.getElementById('formEncuesta').addEventListener('submit', async (e) => 
   });
 
   try {
-    const res = await fetch('https://capstone-backend-vins.azurewebsites.net/respuestas', {
+    const response = await fetch('https://capstone-backend-vins.azurewebsites.net/respuestas', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     });
 
-    const result = await res.json();
+    if (!response.ok) {
+      throw new Error(`Error HTTP: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log("✅ Resultado recibido:", result);
 
     Swal.fire({
       icon: 'success',
@@ -105,7 +106,5 @@ document.getElementById('formEncuesta').addEventListener('submit', async (e) => 
       title: 'Error',
       text: 'No se pudo enviar la encuesta. Inténtalo de nuevo.'
     });
-  } finally {
-    enviarBtn.disabled = false;
   }
 });
